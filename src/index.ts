@@ -10,8 +10,6 @@ client.once(Events.ClientReady, (readyClient) => {
   console.log(`Logged in as ${readyClient.user.tag}`);
 });
 
-client.login(process.env.PRIVATE_BOT_TOKEN);
-
 // COMMAND HANDLER
 
 // Define __dirname
@@ -47,3 +45,6 @@ for (const folder of commandFolders) {
     }
   }
 }
+
+// login the bot
+client.login(process.env.PRIVATE_BOT_TOKEN);
