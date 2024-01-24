@@ -48,3 +48,31 @@ for (const folder of commandFolders) {
 
 // login the bot
 client.login(process.env.PRIVATE_BOT_TOKEN);
+
+// ---- Commnad interaction reciever -----
+client.on(Events.InteractionCreate, async (interaction) => {
+  if (!interaction.isChatInputCommand()) {
+    return;
+  }
+  const command = interaction.client.commands.get(interaction.command);
+  if (!command) {
+    interaction.reply(`Command not found: ${interaction.command?.name}`);
+  }
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.log(error);
+    if (interaction.replied || interaction.deferred) {
+      await interaction.reply({
+        content: `There was an error executing the command: ${interaction.command?.name}`,
+        ephemeral: true,
+      });
+    } else {
+      interaction.reply({
+        content: `There was an error executing the command: ${interaction.command?.name}`,
+        ephemeral: true,
+      });
+    }
+  }
+});
