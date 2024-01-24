@@ -14,5 +14,9 @@
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.6",
+    "tsx": "^4.7.0"
   }
 }
