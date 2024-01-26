@@ -33,7 +33,7 @@ for (const folder of commandFolders) {
   // require each file
   for (const file of files) {
     const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
+    const command = import(filePath);
 
     // set them in client.commands property
     if ("data" in command && "execute" in command) {
