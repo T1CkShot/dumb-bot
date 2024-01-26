@@ -26,9 +26,9 @@ client.commands = new Collection();
 // return the files for each folder in commandFolders in an array
 for (const folder of commandFolders) {
   const commandsPath = path.join(foldersPath, folder);
-  const files = fs.readdirSync(commandsPath).filter((file) => {
-    file.endsWith(".js");
-  });
+  const files = fs
+    .readdirSync(commandsPath)
+    .filter((file) => file.endsWith(".js"));
 
   // require each file
   for (const file of files) {
