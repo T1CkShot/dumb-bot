@@ -31,7 +31,7 @@ for (const folder of commandFolders) {
   });
 
   // require each file
-  for (const file in files) {
+  for (const file of files) {
     const filePath = path.join(commandsPath, file);
     const command = require(filePath);
 
