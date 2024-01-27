@@ -40,7 +40,7 @@ for (const folder of commandFolders) {
       client.commands.set(command.data.name, command);
     } else {
       console.log(
-        `[Warning] the command at ${filePath} is missing 'data' or 'execute' property`,
+        `![Warning] the command at ${filePath} is missing 'data' or 'execute' property`,
       );
     }
   }
