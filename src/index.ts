@@ -1,8 +1,15 @@
 import "dotenv/config";
-import { Client, Collection, Events, GatewayIntentBits } from "discord.js";
+import {
+  Client,
+  Collection,
+  Events,
+  GatewayIntentBits,
+  Interaction,
+} from "discord.js";
 import * as path from "path";
 import * as fs from "fs";
 import { fileURLToPath } from "url";
+import Command from "./utils/types";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -54,9 +61,11 @@ client.on(Events.InteractionCreate, async (interaction: Interaction) => {
   if (!interaction.isChatInputCommand()) {
     return;
   }
-  const command = interaction.client.commands.get(interaction.command);
+
+  const command = interaction.client.commands.get(interaction.commandName);
   if (!command) {
-    interaction.reply(`Command not found: ${interaction.command?.name}`);
+    interaction.reply(`Command not found: ${interaction.commandName}`);
+    return;
   }
 
   try {
