@@ -50,7 +50,7 @@ for (const folder of commandFolders) {
 client.login(process.env.PRIVATE_BOT_TOKEN);
 
 // ---- Commnad interaction reciever -----
-client.on(Events.InteractionCreate, async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction: Interaction) => {
   if (!interaction.isChatInputCommand()) {
     return;
   }
