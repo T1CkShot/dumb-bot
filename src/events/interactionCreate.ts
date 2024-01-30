@@ -8,7 +8,10 @@ export const execute = async (interaction: Interaction) => {
 
   const command = interaction.client.commands.get(interaction.commandName);
   if (!command) {
-    interaction.reply(`Command not found: ${interaction.commandName}`);
+    interaction.reply({
+      content: `Command not found: ${interaction.commandName}`,
+      ephemeral: true,
+    });
     return;
   }
 
