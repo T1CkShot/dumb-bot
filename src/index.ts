@@ -1,11 +1,5 @@
 import "dotenv/config";
-import {
-  Client,
-  Collection,
-  Events,
-  GatewayIntentBits,
-  Interaction,
-} from "discord.js";
+import { Client, Collection, GatewayIntentBits } from "discord.js";
 import * as path from "path";
 import * as fs from "fs";
 import { fileURLToPath } from "url";
@@ -46,6 +40,22 @@ for (const folder of commandFolders) {
         `![Warning] the command at ${filePath} is missing 'data' or 'execute' property`,
       );
     }
+  }
+}
+
+// ---- EVENT HANDLER -----
+const eventsPath = path.join(__dirname, "events");
+const eventFiles = fs
+  .readdirSync(eventsPath)
+  .filter((file) => file.endsWith(".js"));
+
+for (const file of eventFiles) {
+  const filePath = path.join(eventsPath, file);
+  const event: BotEvent = await import(filePath);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args));
   }
 }
 
