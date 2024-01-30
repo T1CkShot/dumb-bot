@@ -9,7 +9,7 @@ import {
 import * as path from "path";
 import * as fs from "fs";
 import { fileURLToPath } from "url";
-import Command from "./utils/types";
+import { BotEvent, Command } from "./@types/app";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 

@@ -8,7 +8,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { fileURLToPath } from "url";
 import { REST, Routes } from "discord.js";
-import Command from "./types";
+import { Command } from "../@types/app";
 
 // ----- Place commands in an array -----
 
