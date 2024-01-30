@@ -12,6 +12,13 @@ export interface Command {
     interaction: CommandInteraction,
   ) => Promise<InteractionResponse<boolean>>;
 }
+
+export interface BotEvent {
+  name: string;
+  once?: boolean;
+  execute: (...args) => void;
+}
+
 declare module "discord.js" {
   export interface Client {
     commands: Collection<unknown, Command>;
