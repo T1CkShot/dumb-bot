@@ -13,10 +13,6 @@ import Command from "./utils/types";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once(Events.ClientReady, (readyClient) => {
-  console.log(`Logged in as ${readyClient.user.tag}`);
-});
-
 // COMMAND HANDLER
 
 // Define __dirname
@@ -55,33 +51,3 @@ for (const folder of commandFolders) {
 
 // login the bot
 client.login(process.env.PRIVATE_BOT_TOKEN);
-
-// ---- Commnad interaction reciever -----
-client.on(Events.InteractionCreate, async (interaction: Interaction) => {
-  if (!interaction.isChatInputCommand()) {
-    return;
-  }
-
-  const command = interaction.client.commands.get(interaction.commandName);
-  if (!command) {
-    interaction.reply(`Command not found: ${interaction.commandName}`);
-    return;
-  }
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    console.log(error);
-    if (interaction.replied || interaction.deferred) {
-      await interaction.reply({
-        content: `There was an error executing the command: ${interaction.command?.name}`,
-        ephemeral: true,
-      });
-    } else {
-      interaction.reply({
-        content: `There was an error executing the command: ${interaction.command?.name}`,
-        ephemeral: true,
-      });
-    }
-  }
-});
